@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 
+import { ThemeProvider } from '@/components/theme-provider';
+
 import './globals.css';
 
 const roboto = Roboto({
@@ -22,9 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${roboto.className} antialiased`}>{children}</body>
-      </html>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <html lang="en">
+          <body className={`${roboto.className} antialiased`}>{children}</body>
+        </html>
+      </ThemeProvider>
     </ClerkProvider>
   );
 }
