@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 
 import { ThemeProvider } from '@/components/theme-provider';
+import { Layout } from '@/components/ui/layout';
 
 import './globals.css';
 
@@ -24,16 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <html lang="en">
-          <body className={`${roboto.className} antialiased`}>{children}</body>
-        </html>
-      </ThemeProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${roboto.className} antialiased`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Layout>{children}</Layout>
+          </ThemeProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
