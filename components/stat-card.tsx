@@ -24,25 +24,26 @@ export function StatCard({
 }: StatCardProps) {
   return (
     <Card {...attrs}>
-      <CardHeader className='flex flex-row items-center justify-between pb-2 text-muted-foreground'>
-        <CardTitle className='text-base font-medium'>{title}</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between pb-2 text-muted-foreground">
+        <CardTitle className="text-base font-medium">{title}</CardTitle>
 
-        <Icon className=''/>
+        <Icon className="" />
       </CardHeader>
 
       <CardContent>
-        <div className='text-2xl font-bold pb-5'>
+        <div className="text-2xl font-bold pb-5">
           {isLoading ? (
-            <Skeleton className='w-10'>
+            <Skeleton className="w-10">
               <span className="opacity-0">0</span>
             </Skeleton>
-          ) : <span className='animate-in duration-300 slide-in-from-bottom-2 fade-in inline-block'>
-            {value}
-          </span>
-          }
+          ) : (
+            <span className="animate-in duration-300 slide-in-from-bottom-2 fade-in inline-block">
+              {value}
+            </span>
+          )}
         </div>
 
-        <p className='text-sm text-foreground'>{description}</p>
+        <p className="text-sm text-foreground">{description}</p>
       </CardContent>
     </Card>
   );
