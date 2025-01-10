@@ -64,7 +64,6 @@ export async function FormStatCardsList({
           description={description}
           isLoading={isLoading}
           Icon={Icon}
-          className="shadow-xl dark:shadow-md dark:shadow-primary/50"
         />
       ))}
     </>

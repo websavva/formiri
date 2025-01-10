@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { Layout } from '@/components/ui/layout';
+import { Toaster } from '@/components/ui/toaster';
 
 import './globals.css';
 
@@ -34,6 +35,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Layout>{children}</Layout>
+
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
