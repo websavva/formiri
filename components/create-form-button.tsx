@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FilePlusIcon } from 'lucide-react';
@@ -33,8 +33,7 @@ import { Card } from './ui/card';
 
 export function CreateFormButton() {
   const { toast } = useToast();
-
-  const [isOpened, setIsOpened] = useState(false);
+  const router = useRouter();
 
   const form = useForm<CreateFormDto>({
     resolver: zodResolver(CreateFormDtoSchema),
@@ -46,13 +45,13 @@ export function CreateFormButton() {
 
   function onSubmit(createFormDto: CreateFormDto) {
     return createForm(createFormDto)
-      .then(() => {
+      .then(({ id }) => {
         toast({
           title: 'Success',
           description: 'New form was created',
         });
 
-        setIsOpened(false);
+        router.push(`/builder/${id}`);
       })
       .catch((err) => {
         toast({
@@ -64,8 +63,8 @@ export function CreateFormButton() {
   }
 
   return (
-    <Dialog open={isOpened} onOpenChange={setIsOpened}>
-      <DialogTrigger>
+    <Dialog>
+      <DialogTrigger asChild>
         <Card className="flex flex-col justify-center font-bold items-center p-12 text-muted-foreground/80 border-dashed border-2 transition cursor-pointer hover:bg-accent">
           <FilePlusIcon className="size-10" />
 

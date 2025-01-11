@@ -34,7 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Layout>{children}</Layout>
+            <Layout className="max-w-[100rem] mx-auto">{children}</Layout>
 
             <Toaster />
           </ThemeProvider>

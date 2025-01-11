@@ -27,7 +27,7 @@ export function StatCard({
       <CardHeader className="flex flex-row items-center justify-between pb-2 text-muted-foreground">
         <CardTitle className="text-base font-medium">{title}</CardTitle>
 
-        <Icon className="" />
+        <Icon />
       </CardHeader>
 
       <CardContent>
@@ -38,7 +38,7 @@ export function StatCard({
             </Skeleton>
           ) : (
             <span className="animate-in duration-300 slide-in-from-bottom-2 fade-in inline-block">
-              {value}
+              {value.toLocaleString()}
             </span>
           )}
         </div>

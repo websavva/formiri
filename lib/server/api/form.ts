@@ -62,3 +62,13 @@ export async function createForm(createFormDto: CreateFormDto) {
     },
   });
 }
+
+export async function loadForms() {
+  const currentUser = await loadCurrentUser();
+
+  return prisma.form.findMany({
+    where: {
+      userId: currentUser.id,
+    },
+  });
+}
