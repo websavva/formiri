@@ -1,0 +1,41 @@
+.cls-2,
+.cls-3 {
+  @apply fill-none
+}
+
+.cls-10,
+.cls-2,
+.cls-3,
+.cls-8,
+.cls-9 {
+  stroke-linecap: round;
+  stroke: #263238;
+  stroke-linejoin: round;
+}
+
+.cls-11,
+.cls-9 {
+  fill: #263238;
+}
+
+.cls-10,
+.cls-12,
+.cls-13 {
+  @apply fill-white
+}
+
+.cls-10,
+.cls-3,
+.cls-8,
+.cls-9 {
+  stroke-width: 0.75px;
+}
+
+.cls-16,
+.cls-8 {
+  @apply fill-current
+}
+
+.cls-13 {
+  opacity: 0.5;
+}

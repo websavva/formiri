@@ -1,10 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import Link from 'next/link';
 
+import { cn } from '@/lib/utils';
+
 import { Logo } from '../logo';
 import { ThemeSwitcher } from '../theme-switcher';
 import { AuthButton } from './auth-button';
-import { cn } from '@/lib/utils';
 
 export function Layout({
   children,
@@ -15,7 +16,7 @@ export function Layout({
     <div
       {...attrs}
       className={cn(
-        'flex flex-col min-h-screen w-full bg-background px-12',
+        'grid grid-cols-[100%] grid-rows-[auto_1fr] min-h-screen w-full bg-background px-12',
         className,
       )}
     >
@@ -29,7 +30,7 @@ export function Layout({
         <AuthButton className="ml-5" />
       </nav>
 
-      <main className="mt-5">{children}</main>
+      <main className="mt-5 flex-grow">{children}</main>
     </div>
   );
 }

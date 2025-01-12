@@ -4,7 +4,7 @@ import type { Form } from '@prisma/client';
 import { EditIcon, ExternalLinkIcon, UsersIcon, AwardIcon } from 'lucide-react';
 
 import { formatDistanceToNow } from 'date-fns';
-import { loadForms } from '@/lib/server/api/form';
+import { getForms } from '@/lib/server/api/form';
 
 import {
   Card,
@@ -111,7 +111,7 @@ export function FormCardSkeleton(props: HTMLAttributes<HTMLDivElement>) {
 }
 
 export async function FormCardsListWrapper() {
-  const forms = await loadForms();
+  const forms = await getForms();
 
   return forms.map((form) => <FormCard key={form.id} form={form} />);
 }

@@ -1,20 +1,20 @@
 'use server';
 
-import { currentUser as getCurrentUser } from '@clerk/nextjs/server';
+import { currentUser as fetchCurrentUser } from '@clerk/nextjs/server';
 
 import { prisma } from '../prisma';
 import { type CreateFormDto, CreateFormDtoSchema } from '@/dtos';
 
-async function loadCurrentUser() {
-  const currentUser = await getCurrentUser();
+async function getCurrentUser() {
+  const currentUser = await fetchCurrentUser();
 
   if (!currentUser) throw new Error('User is not found !');
 
   return currentUser;
 }
 
-export async function loadFormStats() {
-  const currentUser = await loadCurrentUser();
+export async function getFormStats() {
+  const currentUser = await getCurrentUser();
 
   let {
     _sum: {
@@ -52,7 +52,7 @@ export async function loadFormStats() {
 export async function createForm(createFormDto: CreateFormDto) {
   const newFormFields = await CreateFormDtoSchema.parseAsync(createFormDto);
 
-  const currentUser = await loadCurrentUser();
+  const currentUser = await getCurrentUser();
 
   return prisma.form.create({
     data: {
@@ -63,12 +63,27 @@ export async function createForm(createFormDto: CreateFormDto) {
   });
 }
 
-export async function loadForms() {
-  const currentUser = await loadCurrentUser();
+export async function getForms() {
+  const currentUser = await getCurrentUser();
 
   return prisma.form.findMany({
     where: {
       userId: currentUser.id,
     },
   });
+}
+
+export async function getFormById(id: number) {
+  const currentUser = await getCurrentUser();
+
+  const form = await prisma.form.findUnique({
+    where: {
+      id,
+      userId: currentUser.id,
+    },
+  });
+
+  if (!form) throw new Error(`Form with id "${id}" was not found`);
+
+  return form;
 }

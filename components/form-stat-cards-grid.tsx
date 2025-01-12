@@ -6,13 +6,13 @@ import {
   TicketMinusIcon,
 } from 'lucide-react';
 
-import { loadFormStats } from '@/lib/server/api';
+import { getFormStats } from '@/lib/server/api';
 
 import { StatCard } from './stat-card';
 import { cn } from '@/lib/utils';
 
 export interface FormStatCardsListProps
-  extends Partial<Awaited<ReturnType<typeof loadFormStats>>> {
+  extends Partial<Awaited<ReturnType<typeof getFormStats>>> {
   isLoading?: boolean;
 }
 
@@ -71,7 +71,7 @@ export async function FormStatCardsList({
 }
 
 async function FormStatCardsListWrapper() {
-  const formStats = await loadFormStats();
+  const formStats = await getFormStats();
 
   return <FormStatCardsList {...formStats} />;
 }
