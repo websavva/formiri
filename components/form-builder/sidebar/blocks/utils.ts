@@ -1,7 +1,11 @@
-import type { FormBuilderBlock, FormBuilderBlockType } from './types';
+import type {
+  FormBuilderBlock,
+  FormBuilderBlockType,
+  RawFormBuilderBlockType,
+} from './types';
 
 export const defineFormBuilderBlock = <
-  T extends FormBuilderBlockType | `${FormBuilderBlockType}`,
+  T extends FormBuilderBlockType | RawFormBuilderBlockType,
   P extends Record<string, any>,
 >(
   blockDefinition: FormBuilderBlock<T, P>,
