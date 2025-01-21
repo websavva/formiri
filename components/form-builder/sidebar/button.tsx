@@ -1,12 +1,21 @@
-'use client'
+'use client';
 
-import type { HTMLAttributes, useState } from 'react';
-import {useDndMonitor} from '@dnd-kit/core';
-
+import { HTMLAttributes, ReactNode, useState } from 'react';
+import {
+  useDndMonitor,
+  type DataRef,
+  DragOverlay,
+  useDraggable,
+} from '@dnd-kit/core';
 import type { LucideIcon } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
-import { useDraggable } from '@dnd-kit/core';
-import { FormBuilderBlockType, RawFormBuilderBlockType } from './blocks/types';
+
+import {
+  FormBuilderBlockType,
+  RawFormBuilderBlockType,
+  BUILDER_FORM_BLOCK_CONFIGS_MAP,
+} from './blocks';
 
 export interface FormBuilderSidebarButtonProps
   extends HTMLAttributes<HTMLButtonElement> {
@@ -25,11 +34,12 @@ export function FormBuilderSidebarButton({
   ...attrs
 }: FormBuilderSidebarButtonProps) {
   const draggable = useDraggable({
-    id: `form-builder-block_${type}`,
+    id: `form-builder-block`,
     disabled: isDragDisabled,
 
     data: {
-      isFormBuilderBlocl: true,
+      type,
+      isFormBuilderSidebarButton: true,
     },
   });
 
@@ -39,7 +49,7 @@ export function FormBuilderSidebarButton({
       ref={draggable.setNodeRef}
       {...draggable.attributes}
       className={cn(
-        'cursor-grab p-3 flex flex-col items-center rounded-lg border border-foreground/20 text-foreground w-36',
+        'cursor-grab p-3 flex flex-col items-center rounded-lg border border-foreground/20 text-foreground w-36 bg-background',
         className,
       )}
       {...draggable.listeners}
@@ -51,7 +61,41 @@ export function FormBuilderSidebarButton({
   );
 }
 
-export function FormBuilderSidebarButtonDragOverlay(props: HTMLAttributes<HTMLButtonElement>) {
-  // const [active]
-  // return <FormBuilderSidebarButton />
+export function FormBuilderSidebarButtonDragOverlay() {
+  const [draggedItemPayload, setDraggedItemPayload] = useState<DataRef | null>(
+    null,
+  );
+
+  useDndMonitor({
+    onDragStart(e) {
+      setDraggedItemPayload(e.active.data);
+    },
+
+    onDragEnd() {
+      setDraggedItemPayload(null);
+    },
+
+    onDragCancel() {
+      setDraggedItemPayload(null);
+    },
+  });
+
+  let draggedItemNode: ReactNode | null = null;
+
+  if (draggedItemPayload?.current) {
+    if (draggedItemPayload.current.isFormBuilderSidebarButton) {
+      const { type } = draggedItemPayload.current;
+
+      const { buttonProps } =
+        BUILDER_FORM_BLOCK_CONFIGS_MAP[
+          type as keyof typeof BUILDER_FORM_BLOCK_CONFIGS_MAP
+        ];
+
+      draggedItemNode = (
+        <FormBuilderSidebarButton isDragDisabled type={type} {...buttonProps} />
+      );
+    }
+  }
+
+  return <DragOverlay dropAnimation={null}>{draggedItemNode}</DragOverlay>;
 }

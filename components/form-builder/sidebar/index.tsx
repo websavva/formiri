@@ -3,7 +3,10 @@ import type { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 import { BUILDER_FORM_BLOCK_CONFIGS } from './blocks';
-import { FormBuilderSidebarButton } from './button';
+import {
+  FormBuilderSidebarButton,
+  FormBuilderSidebarButtonDragOverlay,
+} from './button';
 
 export interface FormBuilderSidebarProps extends HTMLAttributes<HTMLElement> {}
 
@@ -19,9 +22,13 @@ export function FormBuilderSidebar({
 
       <div className="px-3">
         {BUILDER_FORM_BLOCK_CONFIGS.map(({ type, buttonProps }) => {
-          return <FormBuilderSidebarButton key={type} {...buttonProps} />;
+          return (
+            <FormBuilderSidebarButton key={type} {...buttonProps} type={type} />
+          );
         })}
       </div>
+
+      <FormBuilderSidebarButtonDragOverlay />
     </aside>
   );
 }
