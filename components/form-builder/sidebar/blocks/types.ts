@@ -20,7 +20,7 @@ export interface FormBuilderBlock<
 
   formComponent: FC;
 
-  editorComponent: FC;
+  propertiesComponent: FC;
 
   buttonProps: {
     Icon: LucideIcon;

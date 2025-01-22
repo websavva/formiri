@@ -22,5 +22,5 @@ export const textFieldFormBuilderBlockConfig = defineFormBuilderBlock({
 
   formComponent: () => '',
 
-  editorComponent: () => '',
+  propertiesComponent: () => '',
 });
