@@ -3,7 +3,6 @@ import type { LucideIcon } from 'lucide-react';
 
 export enum FormBuilderBlockType {
   TextField = 'textField',
-  DateInput = 'dateInput',
 }
 
 export type RawFormBuilderBlockType = `${FormBuilderBlockType}`;
@@ -26,4 +25,9 @@ export interface FormBuilderBlock<
     Icon: LucideIcon;
     label: string;
   };
+}
+
+export interface FormBuilderBlockDragPayload {
+  type: FormBuilderBlockType;
+  isFormBuilderSidebarButton: true;
 }

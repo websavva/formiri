@@ -15,6 +15,7 @@ import {
   FormBuilderBlockType,
   RawFormBuilderBlockType,
   BUILDER_FORM_BLOCK_CONFIGS_MAP,
+  FormBuilderBlockDragPayload,
 } from './blocks';
 
 export interface FormBuilderSidebarButtonProps
@@ -84,12 +85,10 @@ export function FormBuilderSidebarButtonDragOverlay() {
 
   if (draggedItemPayload?.current) {
     if (draggedItemPayload.current.isFormBuilderSidebarButton) {
-      const { type } = draggedItemPayload.current;
+      const { type } =
+        draggedItemPayload.current as FormBuilderBlockDragPayload;
 
-      const { buttonProps } =
-        BUILDER_FORM_BLOCK_CONFIGS_MAP[
-          type as keyof typeof BUILDER_FORM_BLOCK_CONFIGS_MAP
-        ];
+      const { buttonProps } = BUILDER_FORM_BLOCK_CONFIGS_MAP[type];
 
       draggedItemNode = (
         <FormBuilderSidebarButton isDragDisabled type={type} {...buttonProps} />

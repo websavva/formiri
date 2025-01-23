@@ -2,9 +2,15 @@
 
 import type { HTMLAttributes } from 'react';
 import type { Form } from '@prisma/client';
-import { useDroppable } from '@dnd-kit/core';
+import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 
 import { cn } from '@/lib/utils';
+import { useFormBuilderContext } from '@/hooks/use-form-builder-context';
+
+import {
+  type FormBuilderBlockDragPayload,
+  BUILDER_FORM_BLOCK_CONFIGS_MAP,
+} from './sidebar/blocks';
 
 export interface FormBuilderCanvasProps extends HTMLAttributes<HTMLDivElement> {
   form: Form;
@@ -15,8 +21,33 @@ export function FormBuilderCanvas({
   className,
   ...attrs
 }: FormBuilderCanvasProps) {
+  const { elements, addElement } = useFormBuilderContext();
+
   const droppable = useDroppable({
     id: 'form-builder-canvas',
+  });
+
+  useDndMonitor({
+    onDragEnd({ active, over }) {
+      if (!active || !over) return;
+
+      const { data: draggedItemPayload } = active;
+
+      if (draggedItemPayload?.current) {
+        if (draggedItemPayload.current.isFormBuilderSidebarButton) {
+          const { type } =
+            draggedItemPayload.current as FormBuilderBlockDragPayload;
+
+          const { getInitialProps } = BUILDER_FORM_BLOCK_CONFIGS_MAP[type];
+
+          addElement({
+            id: crypto.randomUUID(),
+            type,
+            props: getInitialProps(),
+          });
+        }
+      }
+    },
   });
 
   return (
@@ -35,13 +66,19 @@ export function FormBuilderCanvas({
         }}
       />
       <div className="relative z-[1] size-11/12 rounded-lg bg-background overflow-auto shadow-2xl dark:shadow-primary/50 border-dashed border-4 border-foreground-muted dark:border-none p-5">
-        {!droppable.isOver && (
+        {!droppable.isOver && !elements.length && (
           <div className="size-full grid grid-cols-[1fr] grid-rows-[1fr] items-center text-3xl font-bold text-muted-foreground text-center">
             Drop here
           </div>
         )}
 
-        {droppable.isOver && <div className='w-full h-28 rounded-lg bg-foreground/10'></div>}
+        {elements.map((element) => (
+          <div key={element.id}>{element.type}</div>
+        ))}
+
+        {droppable.isOver && (
+          <div className="w-full h-28 rounded-lg bg-foreground/10"></div>
+        )}
       </div>
     </div>
   );

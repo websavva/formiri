@@ -5,7 +5,7 @@ import { FormBuilderElement } from '@/components/form-builder/sidebar/blocks';
 export interface FormBuilderContextSchema {
   elements: FormBuilderElement[];
 
-  addElement: (element: FormBuilderElement, index: number) => void;
+  addElement: (element: FormBuilderElement, index?: number) => void;
 }
 
 export const FormBuilderContext =
