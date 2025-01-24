@@ -2,6 +2,7 @@ import { LetterTextIcon } from 'lucide-react';
 
 import { defineFormBuilderBlock } from '../utils';
 
+import { TextFieldBuilderComponent } from './builder';
 import type { TextFieldBuilderBlockProps } from './types';
 
 export const textFieldFormBuilderBlockConfig = defineFormBuilderBlock({
@@ -13,14 +14,15 @@ export const textFieldFormBuilderBlockConfig = defineFormBuilderBlock({
   },
 
   getInitialProps: (): TextFieldBuilderBlockProps => ({
-    required: true,
+    required: false,
     hint: '',
-    placeholder: '',
+    placeholder: 'Placeholder',
+    label: 'Text Field',
   }),
 
-  builderComponent: () => '',
+  BuilderComponent: TextFieldBuilderComponent,
 
-  formComponent: () => '',
+  FormComponent: () => '',
 
-  propertiesComponent: () => '',
+  PropertiesComponent: () => '',
 });

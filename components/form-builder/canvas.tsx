@@ -72,9 +72,12 @@ export function FormBuilderCanvas({
           </div>
         )}
 
-        {elements.map((element) => (
-          <div key={element.id}>{element.type}</div>
-        ))}
+        {elements.map((element) => {
+          const { BuilderComponent } =
+            BUILDER_FORM_BLOCK_CONFIGS_MAP[element.type];
+
+          return <BuilderComponent key={element.id} props={element.props} />;
+        })}
 
         {droppable.isOver && (
           <div className="w-full h-28 rounded-lg bg-foreground/10"></div>

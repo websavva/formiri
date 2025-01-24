@@ -15,11 +15,11 @@ export interface FormBuilderBlock<
 
   getInitialProps: () => P;
 
-  builderComponent: FC;
+  BuilderComponent: FC<{ props: P }>;
 
-  formComponent: FC;
+  FormComponent: FC;
 
-  propertiesComponent: FC;
+  PropertiesComponent: FC<{ props: P; onPropsUpdate: (props: P) => any }>;
 
   buttonProps: {
     Icon: LucideIcon;
