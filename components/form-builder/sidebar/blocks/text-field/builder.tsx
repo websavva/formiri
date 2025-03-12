@@ -17,7 +17,7 @@ export function TextFieldBuilderComponent({
 
       <Input placeholder={placeholder} type="text" readOnly disabled />
 
-      {hint && <p className="text-[.8em] text-muted-foreground">{hint}</p>}
+      {hint && <p className="text-[.75em] text-muted-foreground">{hint}</p>}
     </div>
   );
 }
