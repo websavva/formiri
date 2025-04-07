@@ -5,7 +5,7 @@ import { FormCardsList } from '@/components/form-card';
 
 export default function DashboardPage() {
   return (
-    <div className='py-5'>
+    <div className='py-5 max-w-[100rem] mx-auto'>
       <FormStatCardsGrid />
 
       <h1 className="text-2xl text-foreground font-bold mt-14 mb-5">

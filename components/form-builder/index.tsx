@@ -28,7 +28,7 @@ export function FormBuilder({ form, className, ...attrs }: FormBuilderProps) {
         >
           <FormBuilderToolbar
             form={form}
-            className="pb-4 border-b border-foreground-50 col-span-full"
+            className="pb-4 border-b border-foreground-50 col-span-full px-5"
           />
 
           <FormBuilderCanvas form={form} />

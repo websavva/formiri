@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className="text-[1.05m]">
         <body className={`${roboto.className} antialiased`}>
           <ThemeProvider
             attribute="class"
@@ -34,7 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Layout className="max-w-[100rem] mx-auto">{children}</Layout>
+            <Layout>{children}</Layout>
 
             <Toaster />
           </ThemeProvider>

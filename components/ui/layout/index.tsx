@@ -16,11 +16,11 @@ export function Layout({
     <div
       {...attrs}
       className={cn(
-        'grid grid-cols-[100%] grid-rows-[auto_1fr] min-h-screen w-full bg-background px-12',
+        'grid grid-cols-[100%] grid-rows-[auto_1fr] min-h-screen w-full bg-background',
         className,
       )}
     >
-      <nav className="flex items-center py-5 border-b border-foreground-50">
+      <nav className="flex items-center py-5 border-b border-foreground-50 px-5">
         <Link href="/">
           <Logo className="h-10 w-auto" />
         </Link>

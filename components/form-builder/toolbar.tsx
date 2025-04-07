@@ -28,19 +28,19 @@ export function FormBuilderToolbar({
       </h1>
 
       <div className="flex items-center space-x-2">
-        <Button variant={'outline'}>
+        <Button variant={'outline'} size={'lg'}>
           <ScanQrCode />
           Preview
         </Button>
 
         {!form.isPublished && (
           <>
-            <Button variant={'outline'}>
+            <Button variant={'outline'} size={'lg'}>
               <CopyCheckIcon />
               Save
             </Button>
 
-            <Button>
+            <Button size={'lg'}>
               <ArrowUpCircleIcon />
               Publish
             </Button>
