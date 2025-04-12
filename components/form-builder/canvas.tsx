@@ -77,7 +77,7 @@ export function FormBuilderCanvas({
             BUILDER_FORM_BLOCK_CONFIGS_MAP[element.type];
 
           return (
-            <div key={element.id} className='py-2 rounded-md'>
+            <div key={element.id} className='py-2 rounded-md h-52'>
               <BuilderComponent props={element.props} />
             </div>
           );
