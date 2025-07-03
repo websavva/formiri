@@ -6,6 +6,9 @@
     "node": "22.x.x",
     "pnpm": "10.x.x"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
