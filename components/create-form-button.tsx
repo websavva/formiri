@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { FilePlusIcon } from 'lucide-react';
+import type { HTMLAttributes } from 'react';
 
 import { CreateFormDtoSchema, CreateFormDto } from '@/dtos';
 import { createForm } from '@/lib/server/api/form';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 import {
   Dialog,
@@ -31,7 +33,7 @@ import { Input } from './ui/input';
 import { Loader2Icon } from 'lucide-react';
 import { Card } from './ui/card';
 
-export function CreateFormButton() {
+export function CreateFormButton(props: HTMLAttributes<HTMLDivElement>) {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -65,7 +67,13 @@ export function CreateFormButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="flex flex-col justify-center font-bold items-center p-12 text-muted-foreground/80 border-dashed border-2 transition cursor-pointer hover:bg-accent">
+        <Card
+          {...props}
+          className={cn(
+            'flex flex-col justify-center font-bold items-center p-12 text-muted-foreground/80 border-dashed border-2 transition cursor-pointer hover:bg-accent',
+            props.className,
+          )}
+        >
           <FilePlusIcon className="size-10" />
 
           <span className="mt-5">Create new form</span>

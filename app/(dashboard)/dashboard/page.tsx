@@ -15,7 +15,7 @@ export default function DashboardPage() {
       <Separator />
 
       <div className="mt-5 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-6 auto-rows-fr">
-        <CreateFormButton />
+        <CreateFormButton className='w-[20rem]'/>
 
         <FormCardsList />
       </div>
